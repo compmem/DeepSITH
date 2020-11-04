@@ -4,7 +4,7 @@
 
 import torch
 from torch import nn
-from isith import iSITH
+from .isith import iSITH
 from torch.nn.utils import weight_norm
 
 
