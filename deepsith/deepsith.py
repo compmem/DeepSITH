@@ -17,7 +17,7 @@ class _DeepSITH_core(nn.Module):
         act_func = layer_params.pop('act_func', None)
 
         self.sith = iSITH(**layer_params)
-
+        
         if act_func is None:
             self.linear = weight_norm(nn.Linear(layer_params['ntau']*in_features,
                                                 hidden_size))
@@ -27,14 +27,16 @@ class _DeepSITH_core(nn.Module):
                                                 hidden_size),
                                         act_func)
             nn.init.kaiming_normal_(self.linear[0].weight.data)  
-    
+        self.dense_bn = nn.BatchNorm1d(hidden_size)
+        
     def forward(self, inp):
         # Outputs as : [Batch, features, tau, sequence]
         x = self.sith(inp)
         
         x = x.transpose(3,2).transpose(2,1)
         x = x.view(x.shape[0], x.shape[1], -1)
-        x = self.linear(x)
+        x = self.linear(x).transpose(2,1)
+        x = self.dense_bn(x).transpose(2,1)
         return x
 
 
