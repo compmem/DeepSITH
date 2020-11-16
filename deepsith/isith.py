@@ -1,6 +1,5 @@
 import torch
-from math import factorial
-
+from math import factorial, log
 # Impulse-based SITH class
 class iSITH(torch.nn.Module):
     def __init__(self, tau_min=.1, tau_max=100., buff_max=None, k=50, ntau=50, dt=1, g=0.0,
@@ -60,7 +59,11 @@ class iSITH(torch.nn.Module):
         
         self.times = torch.arange(dt, buff_max+dt, dt).type(torch.DoubleTensor)
         
-        A = ((1/self.tau_star)*(k**(k+1)/factorial(k))*(self.tau_star**self.g)).unsqueeze(1)
+        a = log(k)*k
+        b = torch.log(torch.arange(2,k).type(torch.DoubleTensor)).sum()
+        
+        #A = ((1/self.tau_star)*(k**(k+1)/factorial(k))*(self.tau_star**self.g)).unsqueeze(1)
+        A = ((1/self.tau_star)*(torch.exp(a-b))*(self.tau_star**self.g)).unsqueeze(1)
         self.filters = A*((self.times.unsqueeze(0)/self.tau_star.unsqueeze(1))**(k+1)) * \
                         torch.exp(k*(-self.times.unsqueeze(0)/self.tau_star.unsqueeze(1)))
         self.filters = torch.flip(self.filters, [-1]).unsqueeze(1).unsqueeze(1)

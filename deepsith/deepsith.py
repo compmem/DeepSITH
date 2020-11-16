@@ -5,40 +5,43 @@
 import torch
 from torch import nn
 from .isith import iSITH
-from torch.nn.utils import weight_norm
 
 
+from deepsith import iSITH
 class _DeepSITH_core(nn.Module):
     def __init__(self, layer_params):
         super(_DeepSITH_core, self).__init__()
 
         hidden_size = layer_params.pop('hidden_size', layer_params['in_features'])
         in_features = layer_params.pop('in_features', None)
+        batch_norm = layer_params.pop('batch_norm', True)
         act_func = layer_params.pop('act_func', None)
-
+        self.batch_norm = batch_norm
+        self.act_func = not (act_func is None)
         self.sith = iSITH(**layer_params)
         
-        if act_func is None:
-            self.linear = weight_norm(nn.Linear(layer_params['ntau']*in_features,
-                                                hidden_size))
-            nn.init.kaiming_normal_(self.linear.weight.data)  
-        else:
-            self.linear = nn.Sequential(nn.Linear(layer_params['ntau']*in_features,
-                                                hidden_size),
-                                        act_func)
-            nn.init.kaiming_normal_(self.linear[0].weight.data)  
-        self.dense_bn = nn.BatchNorm1d(hidden_size)
+        self.linear = nn.Linear(layer_params['ntau']*in_features,
+                                hidden_size)
+        nn.init.kaiming_normal_(self.linear.weight.data)
         
+        if not (act_func is None):
+            self.act_func = act_func
+        if batch_norm:
+            self.dense_bn = nn.BatchNorm1d(hidden_size)
+            
     def forward(self, inp):
         # Outputs as : [Batch, features, tau, sequence]
         x = self.sith(inp)
         
         x = x.transpose(3,2).transpose(2,1)
         x = x.view(x.shape[0], x.shape[1], -1)
-        x = self.linear(x).transpose(2,1)
-        x = self.dense_bn(x).transpose(2,1)
+        x = self.linear(x)
+        if self.act_func:
+            x = self.act_func(x)
+        if self.batch_norm:
+            x = x.transpose(2,1)
+            x = self.dense_bn(x).transpose(2,1)
         return x
-
 
 class DeepSITH(nn.Module):
     """A Module built for SITH like an LSTM
