@@ -64,8 +64,10 @@ class iSITH(torch.nn.Module):
         
         #A = ((1/self.tau_star)*(k**(k+1)/factorial(k))*(self.tau_star**self.g)).unsqueeze(1)
         A = ((1/self.tau_star)*(torch.exp(a-b))*(self.tau_star**self.g)).unsqueeze(1)
-        self.filters = A*((self.times.unsqueeze(0)/self.tau_star.unsqueeze(1))**(k+1)) * \
-                        torch.exp(k*(-self.times.unsqueeze(0)/self.tau_star.unsqueeze(1)))
+
+        self.filters = A*torch.exp((torch.log(self.times.unsqueeze(0)/self.tau_star.unsqueeze(1))*(k+1)) + \
+                        (k*(-self.times.unsqueeze(0)/self.tau_star.unsqueeze(1))))
+        
         self.filters = torch.flip(self.filters, [-1]).unsqueeze(1).unsqueeze(1)
         self.filters = self.filters.type(ttype)
     
