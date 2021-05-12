@@ -32,7 +32,6 @@ class coRNN(nn.Module):
 
         for t in range(x.size(0)):
             hy, hz = self.cell(x[t],hy,hz)
-        print(hy.shape)
         output = self.readout(hy)
 
         return output
