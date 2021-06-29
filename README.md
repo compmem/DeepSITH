@@ -13,11 +13,11 @@ What and When Across Time Scales</a>
 
 ## Overview
 
-<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="http://yoursite.com/the.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
+<p align="center">
+    <br>
+    <img src="https://raw.githubusercontent.com/compmem/DeepSITH/blob/main/figures/model_config.png" width="400"/>
+    <br>
+</p>
 
 Here, we introduce DeepSITH, a network comprising biologically-inspired Scale-Invariant Temporal History (SITH) modules in series with dense connections between layers. SITH modules respond to their inputs with a geometrically-spaced set of time constants, enabling the DeepSITH network to learn problems along a continuum of time-scales.
 
