@@ -61,6 +61,8 @@ The DeepSITH module in pytorch will initialize as a series of deepsith layers, p
 
 Here, we have the first layer only having 15 taustar from `tau_min=1.0` to `tau_max=25`. The second layer is set up to go from `1.0` to `100.0`, which gives it 4 times the temporal range. We found that the logrithmic increasing of layer sizes to work well for the experiments in this repository. 
 
+The DeepSITH module expects an input signal of size (batch_size, 1, sith_params1["in_features"], Time). 
+
 If you want to use **only** the SITH module, which is a part of any DeepSITH layer, you can initialize a SITH using the following parameters. Note, these parameters are also used in the dictionaries above.
 
 #### SITH Parameters
