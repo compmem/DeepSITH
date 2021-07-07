@@ -33,7 +33,7 @@ DeepSITH requires at least PyTorch 1.8.1. It works with cuda, so please follow t
 ## DeepSITH
 DeepSITH is a pytorch module implementing the neurally inspired SITH representation of working memory for use in neural networks. The paper outlining the work detailed in this repository is located <a href="https://arxiv.org/abs/2104.04646">here</a>. 
 
-Primarily, this module utilizes SITH, the Scale-Invariant Temporal History, representation. With SITH, we are able to compress the history of a time series in the same what that human working memory might. For more information, please refer to the paper. 
+Primarily, this module utilizes SITH, the Scale-Invariant Temporal History, representation. With SITH, we are able to compress the history of a time series in the same way that human working memory might. For more information, please refer to the paper. 
 
 ### DeepSITH use
 
@@ -59,7 +59,7 @@ The DeepSITH module in pytorch will initialize as a series of deepsith layers, p
     lp = [sith_params1, sith_params2]
     deepsith_layers = DeepSITH(layer_params=lp, dropout=0.2)
 
-Here, we have the first layer only having 15 taustar from `tau_min=1.0` to `tau_max=25`. The second layer is set up to go from `1.0` to `100.0`, which gives it 4 times the temporal range. We found that the logrithmic increasing of layer sizes to work well for the experiments in this repository. 
+Here, we have the first layer only having 15 taustar from `tau_min=1.0` to `tau_max=25`. The second layer is set up to go from `1.0` to `100.0`, which gives it 4 times the temporal range. We found that the logarithmic increase of layer sizes to work well for the experiments in this repository. 
 
 The DeepSITH module expects an input signal of size (batch_size, 1, sith_params1["in_features"], Time). 
 
@@ -81,7 +81,7 @@ If you want to use **only** the SITH module, which is a part of any DeepSITH lay
 - ntau: int
     Number of taustars produced, spread out logarithmically.
 - dt: float
-    The time delta of the model. The there will be int(buff_max/dt) filters per
+    The time delta of the model. There will be int(buff_max/dt) filters per
     taustar. Essentially this is the base rate of information being presented to the model
 - g: float
     Typically between 0 and 1. This parameter is the scaling factor of the output
@@ -124,6 +124,6 @@ Importantly, this module should be socketed into a larger pytorch model, where t
 
 ## Examples
 
-In the `experiments` folder are the experiments that were included in the paper. Everything to recreate the results therin is included. Everything is in jupyter notebooks. We have also included everything needed to recreate the figures from the paper, but with your results if you change file names around. 
+In the `experiments` folder are the experiments that were included in the paper. Everything to recreate the results therein is included. Everything is in jupyter notebooks. We have also included everything needed to recreate the figures from the paper, but with your results if you change file names around. 
 
 
