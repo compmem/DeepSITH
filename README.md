@@ -5,6 +5,7 @@ What and When Across Time Scales</a>
 
 <h4 align="center">
   <a href="#overview">Overview</a> |
+  <a href="#paper">NeurIPS Paper</a> |
   <a href="#models">Installation</a> |
   <a href="#models">DeepSITH</a> |
   <a href="#testing">Examples</a>  
@@ -17,9 +18,6 @@ What and When Across Time Scales</a>
 
 Here, we introduce DeepSITH, a network comprising biologically-inspired Scale-Invariant Temporal History (SITH) modules in series with dense connections between layers. SITH modules respond to their inputs with a geometrically-spaced set of time constants, enabling the DeepSITH network to learn problems along a continuum of time-scales.
 
-
-
-
 ## Installation
 
 The easiest way to install the DeepSITH module is with pip.
@@ -31,7 +29,7 @@ The easiest way to install the DeepSITH module is with pip.
 DeepSITH requires at least PyTorch 1.8.1. It works with cuda, so please follow the instructions for installing pytorch and cuda <a href="https://pytorch.org/get-started/locally/">here</a>.
 
 ## DeepSITH
-DeepSITH is a pytorch module implementing the neurally inspired SITH representation of working memory for use in neural networks. The paper outlining the work detailed in this repository is located <a href="https://arxiv.org/abs/2104.04646">here</a>. 
+DeepSITH is a pytorch module implementing the neurally inspired SITH representation of working memory for use in neural networks. The paper outlining the work detailed in this repository was published at NeurIPS 2021 <a href="https://proceedings.neurips.cc/paper/2021/hash/e7dfca01f394755c11f853602cb2608a-Abstract.html">here</a>. 
 
 Primarily, this module utilizes SITH, the Scale-Invariant Temporal History, representation. With SITH, we are able to compress the history of a time series in the same way that human working memory might. For more information, please refer to the paper. 
 
