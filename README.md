@@ -5,7 +5,6 @@ What and When Across Time Scales</a>
 
 <h4 align="center">
   <a href="#overview">Overview</a> |
-  <a href="#neurips-paper">NeurIPS Paper</a> |
   <a href="#installation">Installation</a> |
   <a href="#deepsith-use">DeepSITH</a> |
   <a href="#examples">Examples</a>  
