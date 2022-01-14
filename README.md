@@ -5,10 +5,10 @@ What and When Across Time Scales</a>
 
 <h4 align="center">
   <a href="#overview">Overview</a> |
-  <a href="#paper">NeurIPS Paper</a> |
-  <a href="#models">Installation</a> |
-  <a href="#models">DeepSITH</a> |
-  <a href="#testing">Examples</a>  
+  <a href="#neurips-paper">NeurIPS Paper</a> |
+  <a href="#installation">Installation</a> |
+  <a href="#deepsith-use">DeepSITH</a> |
+  <a href="#examples">Examples</a>  
 </h4>
 
 
@@ -30,6 +30,8 @@ DeepSITH requires at least PyTorch 1.8.1. It works with cuda, so please follow t
 
 ## DeepSITH
 DeepSITH is a pytorch module implementing the neurally inspired SITH representation of working memory for use in neural networks. The paper outlining the work detailed in this repository was published at NeurIPS 2021 <a href="https://proceedings.neurips.cc/paper/2021/hash/e7dfca01f394755c11f853602cb2608a-Abstract.html">here</a>. 
+
+Jacques, B., Tiganj, Z., Howard, M., &amp; Sederberg, P. (2021, December 6). DeepSITH: Efficient learning via decomposition of what and when across Time Scales. Advances in Neural Information Processing Systems. 
 
 Primarily, this module utilizes SITH, the Scale-Invariant Temporal History, representation. With SITH, we are able to compress the history of a time series in the same way that human working memory might. For more information, please refer to the paper. 
 
